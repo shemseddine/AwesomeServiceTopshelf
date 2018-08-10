@@ -9,8 +9,6 @@ namespace AwesomeService.WindowsService
     {
         static void Main(string[] args)
         {
-            var runner = new AppRunner();
-
             var serviceName = ConfigurationManager.AppSettings["ServiceName"];
             var serviceDisplayName = ConfigurationManager.AppSettings["ServiceDisplayName"];
             var serviceDescription = ConfigurationManager.AppSettings["ServiceDescription"];
@@ -19,7 +17,7 @@ namespace AwesomeService.WindowsService
             {
                 config.Service<AppRunner>(service =>
                 {
-                    service.ConstructUsing(name => runner);
+                    service.ConstructUsing(name => new AppRunner());
                     service.WhenStarted(serviceConfig => serviceConfig.Start());
                     service.WhenStopped(serviceConfig => serviceConfig.Stop());
                 });
